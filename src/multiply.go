@@ -27,8 +27,8 @@ func Multiply(m1 Matrix2D, m2 Matrix2D) (*Matrix2D, error) {
 	if err != nil {
 		return nil, err
 	}
-	xl1 := m1.SliceY()
-	yl2 := m2.SliceX()
+	xl1 := SliceY(m1)
+	yl2 := SliceX(m2)
 
 	for y, xl := range xl1 {
 		for x, yl := range yl2 {

@@ -2,7 +2,7 @@ package matrix2d
 
 // SliceY returns matrix every horizontal slice
 // normal
-func (m *Matrix2D) SliceY() [][]float64 {
+func SliceY(m Matrix2D) [][]float64 {
 	ll := make([][]float64, len(m.M), len(m.M))
 	copy(ll, m.M)
 	return ll
@@ -10,7 +10,7 @@ func (m *Matrix2D) SliceY() [][]float64 {
 
 // SliceX returns matrix every vertical slice
 // the not normal
-func (m *Matrix2D) SliceX() [][]float64 {
+func SliceX(m Matrix2D) [][]float64 {
 	l := [][]float64{}
 	for i := 0; i < len(m.M[0]); i++ {
 		// vertical slice
