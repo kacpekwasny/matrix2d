@@ -1,64 +1,23 @@
 package matrix2d
 
-// InitMatrix2D create
-func InitMatrix2D(l [][]float64) (*Matrix2D, error) {
-	m := Matrix2D{}
-	m.l = l
-	m.lenY = len(l)
-	m.lenX = len(l[0])
-	m.correct = IsCorrect(m.l)
-
-	return &m, nil
+// SliceY returns matrix every horizontal slice
+// normal
+func (m *Matrix2D) SliceY() [][]float64 {
+	ll := make([][]float64, len(m.M), len(m.M))
+	copy(ll, m.M)
+	return ll
 }
 
-// IsCorrect if every X row has same length
-func IsCorrect(l [][]float64) bool {
-	i := 0
-	ln := len(l)
-	Xlength := len(l[0])
-	for i < ln {
-		if Xlength != len(l[i]) {
-			return false
+// SliceX returns matrix every vertical slice
+// the not normal
+func (m *Matrix2D) SliceX() [][]float64 {
+	l := [][]float64{}
+	for i := 0; i < len(m.M[0]); i++ {
+		// vertical slice
+		l = append(l, []float64{})
+		for k := 0; k < len(m.M); k++ {
+			l[i] = append(l[i], m.M[k][i])
 		}
-		i++
 	}
-	return true
-}
-
-// RangeY ranges over every horizontal list
-func (m *Matrix2D) RangeY() chan []float64 {
-	c1 := make(chan []float64)
-	go func() {
-		defer close(c1)
-		l := len(m.l)
-		i := 0
-		for i < l {
-			c1 <- m.l[i]
-			i++
-		}
-	}()
-	return c1
-}
-
-// RangeX ranges over every vertical list
-func (m *Matrix2D) RangeX() chan []float64 {
-	c1 := make(chan []float64)
-	go func() {
-		defer close(c1)
-		ln := len(m.l[0])
-		i := 0
-		for i < ln {
-			// vertical list
-			vls := []float64{}
-			j := len(m.l)
-			k := 0
-			for k < j {
-				vls = append(vls, m.l[j][i])
-				j++
-			}
-			c1 <- vls
-			i++
-		}
-	}()
-	return c1
+	return l
 }

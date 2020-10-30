@@ -15,3 +15,14 @@ func Multiplicable(m1 Matrix2D, m2 Matrix2D) bool {
 	}
 	return false
 }
+
+// IsCorrect if every X row has same length
+func IsCorrect(l [][]float64) bool {
+	Xlength := len(l[0])
+	for i := 0; i < len(l); i++ {
+		if Xlength != len(l[i]) {
+			return false
+		}
+	}
+	return true
+}

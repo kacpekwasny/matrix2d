@@ -1,21 +1,13 @@
 package matrix2d
 
-/* RangeAll from Top Left to Right Bottom horizontally
-func RangeAllTlRbH(m1 Matrix2D, m2 Matrix2D) (chan [2]float64, error) {
-	if !AreSameSize(m1, m2) {
-		return nil, errMatrixSizeError
-	}
-	c1 := make(chan [2]float64)
-	i := 0
-	l := len(m1.l)
-
-	go func() {
-		defer close(c1)
-		for i<l {
-			c1 <- []float64{}
-		i++
+// Map returns new matrix with every element passed through func
+func Map(m Matrix2D, f func(float64) float64) *Matrix2D {
+	// mr - matrix for return
+	mr, _ := InitEmptyMatrix2D(m.lenY, m.lenX)
+	for y := 0; y < mr.lenY; y++ {
+		for x := 0; x < mr.lenX; x++ {
+			mr.M[y][x] = f(m.M[y][x])
 		}
 	}
-	return
+	return mr
 }
-*/
