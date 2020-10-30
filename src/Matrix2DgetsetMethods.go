@@ -9,3 +9,8 @@ func (m *Matrix2D) GetXlen() int {
 func (m *Matrix2D) GetYlen() int {
 	return m.lenY
 }
+
+// GetCorrect correct atribute
+func (m *Matrix2D) GetCorrect() bool {
+	return m.correct
+}

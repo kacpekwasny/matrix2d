@@ -1,23 +1,20 @@
 package matrix2d
 
-// SliceY returns matrix every horizontal slice
-// normal
-func SliceY(m Matrix2D) [][]float64 {
-	ll := make([][]float64, len(m.M), len(m.M))
-	copy(ll, m.M)
-	return ll
-}
+import "fmt"
 
-// SliceX returns matrix every vertical slice
-// the not normal
-func SliceX(m Matrix2D) [][]float64 {
-	l := [][]float64{}
-	for i := 0; i < len(m.M[0]); i++ {
-		// vertical slice
-		l = append(l, []float64{})
-		for k := 0; k < len(m.M); k++ {
-			l[i] = append(l[i], m.M[k][i])
+// Fill matrix by using func that will be given:
+// lenY, lenX, y, x, value
+func (m *Matrix2D) Fill(f func(int, int, int, int, float64) float64) {
+	for y := 0; y < m.lenY; y++ {
+		for x := 0; x < m.lenX; x++ {
+			m.M[y][x] = f(m.lenY, m.lenX, y, x, m.M[y][x])
 		}
 	}
-	return l
+}
+
+// Print pretty
+func (m *Matrix2D) Print() {
+	for _, l := range m.M {
+		fmt.Println(l)
+	}
 }

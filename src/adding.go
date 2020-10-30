@@ -1,7 +1,10 @@
 package matrix2d
 
 // Add adding two matricies
-func Add(m1 Matrix2D, m2 Matrix2D) (*Matrix2D, error) {
+var Add = Pointer2Normal(add)
+
+// Add adding two matricies
+func add(m1 Matrix2D, m2 Matrix2D) (*Matrix2D, error) {
 	if !AreSameSize(m1, m2) {
 		return nil, errMatrixSizeError
 	}
